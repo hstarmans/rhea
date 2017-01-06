@@ -4,7 +4,7 @@ import subprocess
 from pprint import pprint
 
 import myhdl
-from myhdl import Signal, intbv, always_seq, always_comb
+from myhdl import Signal, intbv, always_seq, always_comb, ResetSignal
 
 from rhea import Global, Clock, Reset
 from rhea.system import Barebone, FIFOBus
@@ -99,8 +99,8 @@ def test_instance():
     # check for basic syntax errors, use test_ice* to test
     # functionality
     xula2_blinky_host(
-        clock=Clock(0, frequency=50e6),
-        led=Signal(intbv(0)[8:]), 
+        clock=Clock(0, frequency=12e6),
+        reset=ResetSignal(0, active=0, async=True),
         bcm14_txd=Signal(bool(0)),
         bcm15_rxd=Signal(bool(0)), )
 
